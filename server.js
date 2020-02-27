@@ -58,3 +58,21 @@ app.use('/api', ensureAuth);
 
 
 //API ROUTES
+
+app.get('/api', (req, res) => {
+    res.send('hello');
+        
+});
+
+
+
+
+
+// start server
+app.listen(port, () => {
+    console.log('the server is running :D on PORT', port);
+});
+
+module.exports = {
+    app: app,
+};
