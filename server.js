@@ -52,9 +52,23 @@ const authRoutes = createAuthRoutes({
 app.use('/api/auth', authRoutes);
 // this adds auth enure, which im assuming checkts the tokens on requests to all of our routes, off anythings coming from the /api route... so all of them
 const ensureAuth = require('./lib/auth/ensure-auth');
+
 app.use('/api', ensureAuth);
 //--------------------------------------
 
 
 
 //API ROUTES
+app.get('/api/starwars', async(req, res) => {
+    const data = await req.get(`https://swapi.co/api/people/?search=${req.query.search}`);
+
+    res.json(data.body);
+});
+
+
+
+
+
+app.listen(process.env.PORT, () => {
+    console.log('listening at ', process.env.PORT);
+});
