@@ -6,7 +6,7 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const client = require('./lib/client');
-
+const request = require('superagent');
 //Init the database connection
 client.connect();
 
@@ -109,9 +109,14 @@ app.post('/api/me/favorites', async(req, res) => {
 
 
 app.get('/api/starwars', async(req, res) => {
-    const data = await req.get(`https://swapi.co/api/people/?search=${req.query.search}`);
-
-    res.json(data.body);
+    try {
+        console.log(req.query);
+        const data = await request.get(`https://swapi.co/api/people/?search=${req.query.search}`);
+        console.log(data);
+        res.json(data.body);
+    } catch (e) {
+        console.error(e);
+    }
 });
 
 
