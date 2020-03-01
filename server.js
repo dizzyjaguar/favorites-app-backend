@@ -54,11 +54,12 @@ app.use('/api/auth', authRoutes);
 const ensureAuth = require('./lib/auth/ensure-auth');
 
 app.use('/api/me', ensureAuth);
-//--------------------------------------
+
 
 
 
 //API ROUTES
+
 app.get('/api/me/favorites', async(req, res) => {
     try {
         const myQuery = `
@@ -103,6 +104,15 @@ app.post('/api/me/favorites', async(req, res) => {
 
 
 
+app.get('/api', (req, res) => {
+    res.send('hello');
+        
+});
+
+
+
+
+
 
 
 
@@ -126,3 +136,13 @@ app.get('/api/starwars', async(req, res) => {
 app.listen(process.env.PORT, () => {
     console.log('listening at ', process.env.PORT);
 });
+
+// start server
+app.listen(port, () => {
+    console.log('the server is running :D on PORT', port);
+});
+
+module.exports = {
+    app: app,
+};
+
